@@ -1,11 +1,12 @@
 package challenges;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import com.google.common.primitives.Ints;
 
 public class Challenge_code {
 	//Variable that stores the selected option
-	private static Scanner reader;
+	static Scanner reader;
 
 	public static int FirstFactorial(String num) {
 		int temp = Integer.parseInt(num);
@@ -132,12 +133,13 @@ public class Challenge_code {
 		}
 		//Moving according to the string
 		//Get each character and move
-		int moveqty = str.length();
-		char movement;
-		int asciimove;
+		//int moveqty = str.length();
+		//char movement;
+		/*int asciimove;
 		for(int i = 0; i<moveqty; i++) {
 			asciimove = (int)str.charAt(i);
-		}//PENDING
+		}*/
+		//PENDING
 		return str;
 	}
 	
@@ -209,6 +211,35 @@ public class Challenge_code {
 		return happy;
 	}
 	
+	public static ArrayList<Integer> digits(int num){
+		ArrayList<Integer> digitsArray = new ArrayList<Integer>();
+		while(num > 0) {
+			digitsArray.add(num%10);
+			num = num/10;
+		}
+		return digitsArray;
+	}
+	
+	public static int productNumbers(ArrayList<Integer> numbers) {
+		int product = 1;
+		for(int number : numbers) {
+			product *= number;
+		}
+		return product;
+	}
+	
+	public static int littleBugger(int num) {
+		
+		int res = productNumbers(digits(num)); //Obtain multiplication
+		System.out.println(res);
+		int bugger = 1;
+		while(res > 9) {
+			bugger++;
+			res = productNumbers(digits(res));
+		}
+		return bugger;
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("What challenge do you want to execute");
 		reader = new Scanner(System.in);
@@ -219,36 +250,43 @@ public class Challenge_code {
 			System.out.println("Type a number to find out the factorial");
 			Scanner s1 = new Scanner(System.in);
 			System.out.print(FirstFactorial(s1.nextLine()));
+			break;
 		case 2:
 			System.out.println("Type a word to reverse");
 			// Reverse challenge
 			Scanner s2 = new Scanner(System.in);
 			System.out.print(FirstReverse(s2.nextLine()));
+			break;
 		case 3:
 			// Next letter challenge
 			System.out.println("Type something to find each next character");
 			Scanner s3 = new Scanner(System.in);
 			System.out.print(LetterChanges(s3.nextLine()));
+			break;
 		case 4:
 			// Longest word challenge
 			System.out.println("Type a group of words");
 			Scanner s4 = new Scanner(System.in);
 		    System.out.print(LongestWord(s4.nextLine()));
+		    break;
 		case 5:
 			// Simple adding challenge
 			System.out.println("Type a number for the sum");
 			Scanner s5 = new Scanner(System.in);
 			System.out.print(SimpleAdding(s5.nextLine()));
+			break;
 		case 6:
 			// Letter capitalize challenge
 			System.out.println("Type words to capitalize");
 			Scanner s6 = new Scanner(System.in);
 			System.out.print(LetterCapitalize(s6.nextLine()));
+			break;
 		case 7:
 			// Correct path challenge
 			System.out.println("Type a path to the grid goal");
 			Scanner s7 = new Scanner(System.in);
 			System.out.print(CorrectPath(s7.nextLine()));
+			break;
 		case 8:
 			// Fix 34 challenge
 			System.out.println("Type an array of numbers");
@@ -262,11 +300,22 @@ public class Challenge_code {
 				aux++;
 			}
 			System.out.print(Fix34(nums));
+			break;
 		case 9:
 			// Happy g challenge
 			System.out.println("Type a string");
 			Scanner s9 = new Scanner(System.in);
 			System.out.print(gHappy(s9.nextLine()));
+			break;
+		case 10:
+			//Little bugger challenge
+			System.out.println("Enter a number with 2 or more digits:");
+			Scanner s10 = new Scanner(System.in);
+			System.out.println("The number required: " + littleBugger(s10.nextInt())
+			+" multiplications");
+			break;
+		default:
+			System.out.println("None of the options above were selected");
 		}
 	}
 }
