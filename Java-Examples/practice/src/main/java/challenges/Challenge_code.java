@@ -1,7 +1,11 @@
 package challenges;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import com.google.common.primitives.Ints;
 
 public class Challenge_code {
@@ -240,6 +244,56 @@ public class Challenge_code {
 		return bugger;
 	}
 	
+	public Map<String, Integer> word0(String[] strings) {
+		  Map <String, Integer> mapword = new HashMap<String, Integer>();
+		  for (String item : strings) {
+		    mapword.put(item, 0);
+		  }
+		  return mapword;
+	}
+	
+	public static boolean regexExecute() {
+		  String line = "This order was placed for QT3000! OK?";
+	      String pattern = "(.*)(\\d+)(.*)";
+	
+	      // Create a Pattern object
+	      Pattern r = Pattern.compile(pattern);
+	
+	      // Now create matcher object.
+	      Matcher m = r.matcher(line);
+	      if (m.find( )) {
+	         System.out.println("Found value: " + m.group(0) );
+	         System.out.println("Found value: " + m.group(1) );
+	         System.out.println("Found value: " + m.group(2) );
+	      }else {
+	         System.out.println("NO MATCH");
+	      }
+	      return true;
+	}
+	
+	public static String perfectNumber(int number) {
+		ArrayList<Integer> perfectDigits = new ArrayList<Integer>();
+		perfectDigits.add(1);
+		int perfectsum = 0;
+		for(int i = 2; i <= (number/2);i++ ) {
+			if(number%i == 0) {
+				perfectDigits.add(i);
+			}
+		}
+		
+		for(int value : perfectDigits) {
+			perfectsum += value;
+		}
+		
+		if(perfectsum == number) {
+			return "The number: " + number + " is perfect";
+		}
+		else {
+			return "The number: " + number + " is not perfect";
+		}
+	}
+		
+	
 	public static void main(String[] args) {
 		System.out.println("What challenge do you want to execute");
 		reader = new Scanner(System.in);
@@ -312,7 +366,16 @@ public class Challenge_code {
 			System.out.println("Enter a number with 2 or more digits:");
 			Scanner s10 = new Scanner(System.in);
 			System.out.println("The number required: " + littleBugger(s10.nextInt())
-			+" multiplications");
+			+ " multiplications");
+			break;
+		case 11:
+			System.out.println(regexExecute());
+			break;
+		case 12:
+			//Perfect number challenge
+			System.out.println("Enter a number:");
+			Scanner s12 = new Scanner(System.in);
+			System.out.println(perfectNumber(s12.nextInt()));
 			break;
 		default:
 			System.out.println("None of the options above were selected");
